@@ -13,7 +13,7 @@
 - Интерпретируемость: понимание того, какие факторы заставляют модель принимать то или иное решение.
 
 ## Данные
-Используется синтетическийнабор данных [Support Ticket Priority Dataset (50k)](https://www.kaggle.com/datasets/albertobircoci/support-ticket-priority-dataset-50k), отражающий работу службы поддержки.
+Используется синтетический набор данных [Support Ticket Priority Dataset (50k)](https://www.kaggle.com/datasets/albertobircoci/support-ticket-priority-dataset-50k), отражающий работу службы поддержки.
 
 - Объем - 50 тысяч записей
 - 33 исходных признака (операционные метрики, категориальные данные о клиентах, бинарные флаги критичных инцидентов, тональность текста и др.)
