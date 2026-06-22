@@ -1,3 +1,11 @@
+<!-- Meta & Language -->
+[![License](https://img.shields.io/github/license/yrmint/ml-app-arch)](#)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](#)
+
+<!-- Machine Learning & Data Science -->
+[![Scikit-learn](https://img.shields.io/badge/Scikit--learn-F7931E?logo=scikit-learn&logoColor=white)](#)
+[![Optuna](https://img.shields.io/badge/Optuna-002C76?logo=optuna&logoColor=white)](#)
+
 # Классификация приоритета обращений
 
 Автоматизация процесса приоритизации инцидентов для IT-сервис-деска с использованием методов машинного обучения.
