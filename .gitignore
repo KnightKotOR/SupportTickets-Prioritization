@@ -1,3 +1,5 @@
-/~$рсовая МЛ.docx
-/~WRL0468.tmp
-/Курсовая МЛ.docx
+data/
+src/_pycache_/
+.python-version
+.venv
+.results
