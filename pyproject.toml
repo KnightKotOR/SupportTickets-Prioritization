@@ -1,7 +1,7 @@
 [project]
 name = "supporttickets-prioritization"
 version = "0.1.0"
-description = "Add your description here"
+description = "Приоритизация тикетов службы поддержки методами ML"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -16,3 +16,27 @@ dependencies = [
     "shap>=0.49.1",
     "xgboost==2.1.4",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.8.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["notebooks", ".ipynb_checkpoints"]
+
+[tool.ruff.lint]
+# E/W — pycodestyle, F — pyflakes, I — isort, B — bugbear,
+# UP — pyupgrade, N — pep8-naming, C4 — comprehensions
+select = ["E", "W", "F", "I", "B", "UP", "N", "C4", "SIM"]
+ignore = ["E501","N803", "N806"]  	# E501: длина строки — на усмотрение fromatter'а
+  									# N803,N806: X, X_val и гиперпарметр C допустимы не в lowercase
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["N802", "N803"]  # в тестах можно CamelCase имена
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
