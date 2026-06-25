@@ -57,13 +57,17 @@
 ### 1. Клонирование репозитория
 
 ```commandline
-git clone https://github.com/KnightKotOR/ML_CourseWork.git
+git clone https://github.com/KnightKotOR/SupportTickets-Prioritization
 ```
 
 ### 2. Установка зависимостей
 
 ```commandline
-pip install -r requirements.txt
+uv python install 3.10
+```
+
+```commandline
+uv sync
 ```
 
 ### 3. Обучение и инференс модели
