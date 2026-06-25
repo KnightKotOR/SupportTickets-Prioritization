@@ -6,6 +6,8 @@
 [![Scikit-learn](https://img.shields.io/badge/Scikit--learn-F7931E?logo=scikit-learn&logoColor=white)](#)
 [![Optuna](https://img.shields.io/badge/Optuna-002C76?logo=optuna&logoColor=white)](#)
 
+[![uv](https://img.shields.io/badge/uv-Lightning_Fast-261230?logo=python&logoColor=white)](#)
+
 # Классификация приоритета обращений
 
 Автоматизация процесса приоритизации инцидентов для IT-сервис-деска с использованием методов машинного обучения.
