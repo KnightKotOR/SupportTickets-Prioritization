@@ -1,16 +1,25 @@
+# Классификация приоритета обращений
+
+Автоматизация процесса приоритизации инцидентов для IT-сервис-деска с использованием методов машинного обучения.
+
 <!-- Meta & Language -->
 [![License](https://img.shields.io/github/license/yrmint/ml-app-arch)](#)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](#)
 
+<!-- Data manipulation -->
+[![Pandas](https://img.shields.io/badge/Pandas-150458?logo=pandas&logoColor=white)](#)
+[![NumPy](https://img.shields.io/badge/NumPy-013243?logo=numpy&logoColor=white)](#)
+
 <!-- Machine Learning & Data Science -->
 [![Scikit-learn](https://img.shields.io/badge/Scikit--learn-F7931E?logo=scikit-learn&logoColor=white)](#)
+[![XGBoost](https://img.shields.io/badge/XGBoost-EB5424?logo=xgboost&logoColor=white)](#)
 [![Optuna](https://img.shields.io/badge/Optuna-002C76?logo=optuna&logoColor=white)](#)
+[![SHAP](https://img.shields.io/badge/SHAP-1D4ED8?logo=shap&logoColor=white)](#)
 
+[![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff)](#)
+[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=github-actions&logoColor=white)](#)
+[![Pytest](https://img.shields.io/badge/Pytest-fff?logo=pytest&logoColor=000)](#)
 [![uv](https://img.shields.io/badge/uv-Lightning_Fast-261230?logo=python&logoColor=white)](#)
-
-# Классификация приоритета обращений
-
-Автоматизация процесса приоритизации инцидентов для IT-сервис-деска с использованием методов машинного обучения.
 
 ## Обзор проекта
 
@@ -33,7 +42,7 @@
 
 ### 1. Предобработка и EDA
 Проведен разведочный анализ данных: выявлены асимметрии в распределениях и скоррелированные признаки.
-- Мультиколлинеарность: удален признак org_users (corr = 0.89 с company_size_cat) для повышения устойчивости моделей.
+- Мультиколлинеарность: удален признак org_users (corr = 0.94 с company_size_cat) для повышения устойчивости моделей.
 - Удалены неинформативные идентификаторы (ID).
 - Разделение данных выполнено с использованием stratify для сохранения баланса классов в выборках (Train 70% / Val 15% / Test 15%).
 
@@ -43,13 +52,16 @@
 - RandomForestClassifier
 - HistGradientBoostingClassifier
 - XGBClassifier
+
 Оптимизация гиперпараметров проводилась с помощью Optuna (50 trials) с кросс-валидацией. Целевой метрикой для оптимизации была выбрана F1-macro, так как она объективно оценивает качество работы с миноритарным классом (High priority).
 
 ### 3. Оценка и интерпретация
 - Лучшая модель - XGBoostClassifier:
   - F1-Score (macro) = 0.98
 - Анализ матрицы ошибок (Confusion Matrix) показал, что модель успешно справляется с минимизацией бизнес-рисков — критические инциденты (High) никогда не классифицируются как низкоприоритетные (Low).
+![alt text](./assets/confusion_matrix_xgboost.png)
 - Для объяснения логики модели применен метод SHAP. Анализ показал, что модель опирается в первую очередь на измеримые последствия инцидента (customers_affected, downtime_min, error_rate_pct), а фоновые характеристики выступают как уточняющие сигналы. Это полностью согласуется с реальной бизнес-логикой.
+![alt text](./assets/shap.png)
 
 ## Установка и запуск
 
@@ -69,12 +81,26 @@ uv python install 3.10
 ```
 
 ```commandline
-uv sync
+uv sync --all-extras --dev
 ```
 
 ### 3. Обучение и инференс модели
 
 [support_tickets.ipynb](src/support_tickets.ipynb)
+
+### 4. Тестирование
+
+Ruff (linter and formatting):
+```commandline
+uv run ruff check . --fix
+```
+```commandline
+uv run ruff format .
+```
+Pytests:
+```
+uv run pytest -n auto
+```
 
 ## Идея для развития проекта:
 
@@ -136,6 +162,6 @@ uv sync
 - Измерить задержки ETL и инференса.
 - Оценить масштабируемость решения.
 
-## Итоговый результат
+### Итоговый результат
 Контейнеризированная потоковая MLOps-платформа, демонстрирующая полный цикл:
 Генерация данных → Kafka/RabbitMQ → Spark ETL → Feature Engineering → Обучение XGBoost → MLflow Registry → API инференса → Мониторинг и обучение.

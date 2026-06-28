@@ -1,5 +1,22 @@
-data/
-src/__pycache__/
+# data
+/data/
+db.sqlite3
+
+# python and venvs
+__pycache__
 .python-version
 .venv
-db.sqlite3
+
+
+# pytest
+.pytest_cache/
+
+
+# Coverage
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Ruff
+.ruff_cache/
