@@ -3,7 +3,7 @@
 Автоматизация процесса приоритизации инцидентов для IT-сервис-деска с использованием методов машинного обучения.
 
 <!-- Meta & Language -->
-[![License](https://img.shields.io/github/license/yrmint/ml-app-arch)](#)
+[![License](https://img.shields.io/github/license/KnightKotOR/SupportTickets-Prioritization)](#)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](#)
 
 <!-- Data manipulation -->
