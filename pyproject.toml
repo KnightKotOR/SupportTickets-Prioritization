@@ -45,3 +45,25 @@ ignore = ["E501","N803", "N806"]  	# E501: длина строки — на ус
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
+
+[tool.pytest.ini_options]
+minversion = "9.1.1"
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--strict-config",
+    "--cov=src",
+    "--cov-report=term-missing",
+    "--cov-report=xml",
+    "--cov-fail-under=60",
+    "-p no:cacheprovider",
+]
+markers = [
+    "smoke: быстрые проверки импорта и структуры",
+    "data: тесты схемы и распределения данных",
+    "model: тесты качества модели и метрик",
+    "invariant: инвариантные тесты (свойства, которые всегда выполняются)",
+    "slow: долгие тесты",
+]

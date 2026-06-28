@@ -5,12 +5,12 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-FIXTURES_DIR = Path("./data/fixtures/")
+FIXTURES_DIR = Path(__file__).resolve().parent / "data" / "fixtures"
 
 EXPECTED_FEATURES = [
     "day_of_week_num",
     "company_id",
-    "company_size",
+    "company_size_cat",
     "industry_cat",
     "customer_tier_cat",
     "region_cat",
@@ -28,7 +28,6 @@ EXPECTED_FEATURES = [
     "has_runbook",
     "customer_sentiment_cat",
     "description_length",
-    "priority_cat",
 ]
 TARGET = "priority_cat"
 
@@ -37,6 +36,7 @@ TARGET = "priority_cat"
 def sample_train() -> pd.DataFrame:
     """Маленький обучающий набор."""
     return pd.read_csv(FIXTURES_DIR / "train_sample.csv")
+
 
 @pytest.fixture(scope="session")
 def sample_test() -> pd.DataFrame:
@@ -52,8 +52,8 @@ def trained_dummy_model(sample_train):
     X = sample_train[EXPECTED_FEATURES]
     y = sample_train[TARGET]
     model = XGBClassifier(
-        n_estimators=20,
-        max_depth=3,
+        n_estimators=400,
+        max_depth=4,
         learning_rate=0.1,
         n_jobs=1,
         random_state=42,
@@ -69,26 +69,26 @@ def high_priority_ticket() -> pd.DataFrame:
     return pd.DataFrame(
         [
             {
-                "day_of_week_num": 2,
-                "company_id": 100020,
+                "day_of_week_num": 1,
+                "company_id": 100016,
                 "company_size_cat": 2,
-                "industry_cat": 4,
-                "customer_tier_cat": 2,
-                "region_cat": 1,
-                "past_30d_tickets": 2,
-                "past_90d_incidents": 2,
-                "product_area_cat": 3,
+                "industry_cat": 2,
+                "customer_tier_cat": 1,
+                "region_cat": 3,
+                "past_30d_tickets": 3,
+                "past_90d_incidents": 0,
+                "product_area_cat": 4,
                 "booking_channel_cat": 2,
-                "reported_by_role_cat": 2,
-                "customers_affected": 57,
-                "error_rate_pct": 3.365603691,
-                "downtime_min": 23,
+                "reported_by_role_cat": 1,
+                "customers_affected": 263,
+                "error_rate_pct": 4.09376478,
+                "downtime_min": 37,
                 "payment_impact_flag": 0,
                 "security_incident_flag": 0,
                 "data_loss_flag": 0,
                 "has_runbook": 1,
-                "customer_sentiment_cat": 2,
-                "description_length": 374,
+                "customer_sentiment_cat": 1,
+                "description_length": 507,
                 "priority_cat": 2,
             }
         ]

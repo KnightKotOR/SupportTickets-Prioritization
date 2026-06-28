@@ -8,7 +8,8 @@ SCHEMA = pa.DataFrameSchema(
     {
         "day_of_week_num": Column(int, checks=Check.isin([1, 2, 3, 4, 5, 6, 7])),
         "company_id": Column(int, checks=Check.ge(10000)),
-        "industry_cat": Column(int, checks=Check.isin([0, 1, 2])),
+        "company_size_cat": Column(int, checks=Check.ge(1)),
+        "industry_cat": Column(int, checks=Check.ge(1)),
         "customer_tier_cat": Column(int, checks=Check.isin([1, 2, 3, 4, 5, 6, 7])),
         "region_cat": Column(int, checks=Check.isin([1, 2, 3])),
         "past_30d_tickets": Column(int, checks=Check.ge(0)),
@@ -33,14 +34,19 @@ SCHEMA = pa.DataFrameSchema(
 
 
 @pytest.mark.data
-def test_schema(sample_dataset):
-    SCHEMA.validate(sample_dataset)
+def train_schema(sample_train):
+    SCHEMA.validate(sample_train)
 
 
 @pytest.mark.data
-def test_class_balance_within_bounds(sample_dataset):
-    """README: Low ~50%, Medium ~35%, High ~15%."""
-    counts = sample_dataset["priority"].value_counts(normalize=True)
-    assert 0.40 < counts["Low"] < 0.60
-    assert 0.25 < counts["Medium"] < 0.45
-    assert 0.05 < counts["High"] < 0.25
+def test_schema(sample_test):
+    SCHEMA.validate(sample_test)
+
+
+@pytest.mark.data
+def test_class_balance_within_bounds(sample_train):
+    """README: Low(0) ~50%, Medium(1) ~35%, High(2) ~15%."""
+    counts = sample_train["priority_cat"].value_counts(normalize=True)
+    assert 0.40 < counts[0] < 0.60
+    assert 0.25 < counts[1] < 0.45
+    assert 0.05 < counts[2] < 0.25
