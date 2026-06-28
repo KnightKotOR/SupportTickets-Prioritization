@@ -1,5 +1,5 @@
 /data/
-src/__pycache__/
+__pycache__
 .python-version
 .venv
 db.sqlite3
