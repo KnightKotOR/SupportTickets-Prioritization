@@ -35,8 +35,13 @@ TARGET = "priority_cat"
 
 @pytest.fixture(scope="session")
 def sample_train() -> pd.DataFrame:
+    """Маленький обучающий набор."""
+    return pd.read_csv(FIXTURES_DIR / "train_sample.csv")
+
+@pytest.fixture(scope="session")
+def sample_test() -> pd.DataFrame:
     """Маленький набор для быстрых тестов."""
-    return pd.read_csv(FIXTURES_DIR / "dataset_sample.csv")
+    return pd.read_csv(FIXTURES_DIR / "test_sample.csv")
 
 
 @pytest.fixture(scope="session")
@@ -65,24 +70,25 @@ def high_priority_ticket() -> pd.DataFrame:
         [
             {
                 "day_of_week_num": 2,
-                "company_id": 100018,
-                "industry_cat": 3,
+                "company_id": 100020,
+                "company_size_cat": 2,
+                "industry_cat": 4,
                 "customer_tier_cat": 2,
-                "region_cat": 2,
-                "past_30d_tickets": 5,
+                "region_cat": 1,
+                "past_30d_tickets": 2,
                 "past_90d_incidents": 2,
-                "product_area_cat": 4,
-                "booking_channel_cat": 4,
-                "reported_by_role_cat": 4,
-                "customers_affected": 51,
-                "error_rate_pct": 5.988785895,
-                "downtime_min": 44,
+                "product_area_cat": 3,
+                "booking_channel_cat": 2,
+                "reported_by_role_cat": 2,
+                "customers_affected": 57,
+                "error_rate_pct": 3.365603691,
+                "downtime_min": 23,
                 "payment_impact_flag": 0,
                 "security_incident_flag": 0,
                 "data_loss_flag": 0,
                 "has_runbook": 1,
                 "customer_sentiment_cat": 2,
-                "description_length": 206,
+                "description_length": 374,
                 "priority_cat": 2,
             }
         ]
